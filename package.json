@@ -21,9 +21,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "eslint": "^5.13.0",
-    "eslint-plugin-react": "^7.12.4"
-  }
+  ]
 }
