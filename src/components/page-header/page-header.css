@@ -1,0 +1,15 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.page-header__arrow-back {
+  padding: 0;
+}
+
+.page-header__title {
+  margin: 0;
+}
