@@ -6,10 +6,13 @@ import CalendarTable from '../../components/calendar-table/calendar-table'
 export default class CalendarPage extends Component {
 
   render() {
-
+  const {calendar, onArrowBackClick} = this.props;
     return (
       <main className="calendar-page">
-        <PageHeader/>
+        <PageHeader
+          pageHeaderCalendarStyle
+          onArrowBackClick={onArrowBackClick}
+        >{calendar.title}</PageHeader>
         <CalendarTable/>
       </main>
     )

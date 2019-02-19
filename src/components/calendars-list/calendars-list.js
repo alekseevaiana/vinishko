@@ -1,13 +1,24 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './calendars-list.css';
 
-const CalendarsList = ({calendars}) => {
+// export default class CalendarsList extends Component {
+//
+// }
+
+const CalendarsList = ({calendars, goToTheCalendar}) => {
 
   const calendarItems = calendars.map((calendar) => {
+    const handleClick = (event) => {
+      event.preventDefault()
+      goToTheCalendar(calendar)
+    }
     return (
       <li className='calendars-list__item' key={calendar.id}>
         <span className='calendars-list__shape'></span>
-        <a href="" className="calendars-list__link">{calendar.title}</a>
+        <a
+          className="calendars-list__link"
+          onClick={handleClick}
+        >{calendar.title}</a>
         </li>
     )
   })

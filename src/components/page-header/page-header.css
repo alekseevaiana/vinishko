@@ -1,7 +1,18 @@
 .page-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.page-header--calendar {
+  box-shadow: 0 2px 5px gray;
+}
+
+.page-header__container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  padding-top: 45px;
+  padding-bottom: 50px;
   padding-left: 20px;
   padding-right: 20px;
 }

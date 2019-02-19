@@ -1,22 +1,30 @@
 import React from 'react'
-import './page-header.css';
+import './page-header.css'
 import arrowBack from '../../img/arrow-back.svg'
 
-const PageHeader = ({onCreateClick}) => {
+const PageHeader = ({children, pageHeaderCalendarStyle, onArrowBackClick}) => {
 
-  const handleClick = evt => {
-    evt.preventDefault()
-    onCreateClick()
+  // const handleClick = evt => {
+  //   evt.preventDefault()
+  //   onCreateClick
+  // }
+
+  let classNames = 'page-header';
+
+  if (pageHeaderCalendarStyle) {
+    classNames = classNames + ' page-header--calendar'
   }
 
   return (
-    <div className="page-header">
-      <button className="page-header__arrow-back"
-        onClick={handleClick}
-      >
-        <img src={arrowBack} alt="back"/>
-      </button>
-      <h2 className="page-header__title">New</h2>
+    <div className={classNames}>
+      <div className="page-header__container">
+        <button className="page-header__arrow-back"
+          onClick={onArrowBackClick}
+        >
+          <img src={arrowBack} alt="back"/>
+        </button>
+        <h2 className="page-header__title">{children}</h2>
+      </div>
     </div>
   )
 }

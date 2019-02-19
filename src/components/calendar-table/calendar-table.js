@@ -19,10 +19,16 @@ export default class CalendarTable extends Component {
       )
     }
 
+    const rows = []
+
+    for (let i = 0; i < 52; i++) {
+      rows.push(tableRow())
+    }
+
     return (
 
       <table className="calendar-table">
-        {tableRow()}
+        {rows}
       </table>
     )
   }

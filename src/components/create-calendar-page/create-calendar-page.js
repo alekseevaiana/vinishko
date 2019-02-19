@@ -25,7 +25,7 @@ export default class CreateCalendarPage extends Component {
 
   render() {
 
-    const {onCreateClick} = this.props
+    const {onArrowBackClick} = this.props
 
     const {label} = this.state
 
@@ -35,8 +35,8 @@ export default class CreateCalendarPage extends Component {
 
       >
         <PageHeader
-          onCreateClick={onCreateClick}
-        />
+          onArrowBackClick={onArrowBackClick}
+        >New</PageHeader>
         <form onSubmit={this.onSubmit}>
 
           <label htmlFor="" className="create-calendar-page__label">

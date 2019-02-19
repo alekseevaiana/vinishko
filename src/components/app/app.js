@@ -43,7 +43,8 @@ export default class App extends Component {
 
     this.state = {
       page: 'main',
-      calendars: restoreItems()
+      calendars: restoreItems(),
+      selectedCalendarId: 1
     }
   }
 
@@ -57,6 +58,10 @@ export default class App extends Component {
     this.setState({page: 'main'})
   }
 
+  goToTheCalendar = (calendar) => {
+    this.setState({page: 'calendar', selectedCalendarId: calendar.id})
+  }
+
   addItem = (text) => {
 
     this.setState(({calendars}) => {
@@ -67,8 +72,8 @@ export default class App extends Component {
       const newCalendar = {
         id: newId,
         title: text,
-        startDate: '12.01.2019',
-        checkedDate: '12.01.2019'
+        startDate: '2019-02-12',
+        checkedDates: ['2019-02-13', '2019-02-15']
       }
 
       const newCalendars = [
@@ -87,25 +92,30 @@ export default class App extends Component {
 
 
   render() {
-    const {page, calendars} = this.state
+    const {page, calendars, selectedCalendarId} = this.state
 
     let element
     if (page === 'main') {
       element = <CalendarsListPage
         calendars={calendars}
         onCreateClick={this.goToForm}
+        goToTheCalendar={this.goToTheCalendar}
       />
     }
 
     if (page === 'create') {
       element = <CreateCalendarPage
-        onCreateClick={this.goBackToMain}
+        onArrowBackClick={this.goBackToMain}
         addItem={this.addItem}
       />
     }
 
     if (page === 'calendar') {
-      element = <CalendarPage/>
+      const theCalendar = calendars.find(cal => cal.id === selectedCalendarId)
+      element = <CalendarPage
+        calendar={theCalendar}
+        onArrowBackClick={this.goBackToMain}
+      />
     }
 
     return (
