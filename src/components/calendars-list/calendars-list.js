@@ -1,9 +1,5 @@
-import React, {Component} from 'react'
+import React from 'react';
 import './calendars-list.css';
-
-// export default class CalendarsList extends Component {
-//
-// }
 
 const CalendarsList = ({calendars, goToTheCalendar}) => {
 

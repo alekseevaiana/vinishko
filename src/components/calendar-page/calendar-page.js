@@ -13,7 +13,7 @@ export default class CalendarPage extends Component {
           pageHeaderCalendarStyle
           onArrowBackClick={onArrowBackClick}
         >{calendar.title}</PageHeader>
-        <CalendarTable/>
+        <CalendarTable calendar={calendar}/>
       </main>
     )
   }

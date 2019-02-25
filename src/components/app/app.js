@@ -42,7 +42,7 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      page: 'main',
+      page: 'calendar',
       calendars: restoreItems(),
       selectedCalendarId: 1
     }

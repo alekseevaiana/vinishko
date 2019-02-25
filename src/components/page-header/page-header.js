@@ -4,11 +4,6 @@ import arrowBack from '../../img/arrow-back.svg'
 
 const PageHeader = ({children, pageHeaderCalendarStyle, onArrowBackClick}) => {
 
-  // const handleClick = evt => {
-  //   evt.preventDefault()
-  //   onCreateClick
-  // }
-
   let classNames = 'page-header';
 
   if (pageHeaderCalendarStyle) {

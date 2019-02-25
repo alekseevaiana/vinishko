@@ -3,33 +3,68 @@ import './calendar-table.css'
 
 export default class CalendarTable extends Component {
 
+
   render() {
+    const {calendar} = this.props;
+    const {checkedDates} = calendar;
 
-    const tableRow = () => {
-      return (
-        <tr className="calendar-table__row">
-          <td className="calendar-table__td">1</td>
-          <td className="calendar-table__td">2</td>
-          <td className="calendar-table__td">3</td>
-          <td className="calendar-table__td">4</td>
-          <td className="calendar-table__td">5</td>
-          <td className="calendar-table__td">6</td>
-          <td className="calendar-table__td">7</td>
-        </tr>
-      )
+    let date = new Date(calendar.startDate);
+    date = getMonday(date);
+
+    const elements = [];
+    for (let i = 0; i < 365; i++) {
+      const isChecked = isDateInChecked(checkedDates, date)
+
+
+      const day = date.getDate()
+      const month = date.getMonth() + 1
+      elements.push(<div className="calendar-cell">{isChecked ? 'X' : ''} {day}/{month}</div>)
+
+      date.setDate(day + 1)
     }
 
-    const rows = []
-
-    for (let i = 0; i < 52; i++) {
-      rows.push(tableRow())
-    }
-
-    return (
-
-      <table className="calendar-table">
-        {rows}
-      </table>
-    )
+    return <div  className="calendar-grid">
+      {elements}
+    </div>
   }
+}
+
+function isDateInChecked(checkedList, date) {
+  const strDate = dateToString(date)
+  return checkedList.includes(strDate)
+}
+
+function sameDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
+}
+
+function dateToString(date) {
+  const year = date.getFullYear()
+  let month = date.getMonth() +1
+  let day = date.getDate()
+
+  if (month < 10) {
+    month = '0' + month
+  }
+
+  if (day < 10) {
+    day = '0' + day
+  }
+
+  return `${year}-${month}-${day}`
+}
+
+function getMonday(date) {
+  const d = new Date(date)
+
+  const dayOfWeek = date.getDay()
+  if (dayOfWeek === 1) {
+    return d
+  }
+
+  d.setDate(d.getDate() - (dayOfWeek - 1))
+
+  return d
 }
