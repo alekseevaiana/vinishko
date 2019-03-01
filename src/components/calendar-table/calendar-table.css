@@ -37,3 +37,8 @@
   font-size: 14px;
   background-color: white;
 }
+
+.calendar-cell--checked {
+  background-color: black;
+  color: white;
+}
