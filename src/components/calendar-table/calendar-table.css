@@ -20,7 +20,6 @@
   background-color: black;
 }
 
-
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -32,13 +31,36 @@
   border: 1px solid black;
   padding: 0;
   padding-left: 5px;
-  padding-top: 5px;
   vertical-align: top;
   font-size: 14px;
   background-color: white;
+  padding-top: 5px;
 }
 
 .calendar-cell--checked {
-  background-color: black;
+  background: black;
   color: white;
 }
+
+.calendar-cell--today-unchecked {
+  background:
+          linear-gradient(to top left,
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,0) calc(50% - 0.8px),
+          rgba(0,0,0,1) 50%,
+          rgba(0,0,0,0) calc(50% + 0.8px),
+          rgba(0,0,0,0) 100%),
+          linear-gradient(to top right,
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,0) calc(50% - 0.8px),
+          rgba(0,0,0,1) 50%,
+          rgba(0,0,0,0) calc(50% + 0.8px),
+          rgba(0,0,0,0) 100%);
+}
+
+.calendar-cell--today-checked {
+  background: black;
+}
+
+
+

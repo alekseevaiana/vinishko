@@ -44,6 +44,7 @@ export default class CreateCalendarPage extends Component {
           <input type="text" className="create-calendar-page__input"
             onChange={this.onLabelChange}
             value={this.state.label}
+            autoFocus
           />
           <Button type="submit">Create</Button>
         </form>

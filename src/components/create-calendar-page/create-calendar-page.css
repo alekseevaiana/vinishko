@@ -14,4 +14,9 @@
   width: 100%;
   margin-bottom: 55px;
   height: 52px;
+  font-size: inherit;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  text-transform: inherit;
+  font-weight: inherit;
 }

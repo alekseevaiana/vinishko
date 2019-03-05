@@ -9,7 +9,31 @@ const lsKey = 'items'
 // получает список календарей и айди какого то календаря
 // и возвращает календарь с таким айди из списка
 function getCalendarFromCalendarsById(calendars, id) {
-  // return calendar
+  return calendars.find(cal => cal.id === id)
+}
+
+function addItemToList(list, item) {
+  return [
+    ...list,
+    item,
+  ]
+}
+
+function removeDateFromList(dates, date) {
+  const dateIndex = dates.indexOf(date)
+
+  return [
+    ...dates.slice(0, dateIndex),
+    ...dates.slice(dateIndex + 1),
+  ]
+}
+
+function replaceInArrayByIndex(array, newElement, index) {
+  return [
+    ...array.slice(0, index),
+    newElement,
+    ...array.slice(index + 1),
+  ]
 }
 
 
@@ -48,7 +72,7 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      page: 'calendar',
+      page: 'main',
       calendars: restoreItems(),
       selectedCalendarId: 1,
     }
@@ -77,14 +101,11 @@ export default class App extends Component {
       const newCalendar = {
         id: newId,
         title: text,
-        startDate: new Date,
-        checkedDates: ['2019-05-13', '2019-05-15'],
+        startDate: new Date(),
+        checkedDates: [],
       }
 
-      const newCalendars = [
-        ...calendars,
-        newCalendar,
-      ]
+      const newCalendars = addItemToList(calendars, newCalendar)
 
       saveItems(newCalendars)
 
@@ -95,69 +116,36 @@ export default class App extends Component {
     })
   }
 
-  //
+
   toggleDay = (currentDate, calendarId) => {
     this.setState((state) => {
       // или const calendars = state.calendars
       const {calendars} = state
-      // const calendar = getCalendarFromCalendarsById(calendars, calendarId)
 
-      const theCalendar = calendars.find(cal => cal.id === calendarId)
-      // находит нужный календарь объект
+      const theCalendar = getCalendarFromCalendarsById(calendars, calendarId)
 
-      const theCalendarIdx = calendars.indexOf(theCalendar);
 
       let theCheckedDates = theCalendar.checkedDates
-      // массив с отмеченными датами в объекте календаря
 
-      const theDateIndex = theCheckedDates.indexOf(currentDate)
-      // возвращает индекс из массива c checkedDates
+      const isDateAlreadyChecked = theCheckedDates.includes(currentDate)
 
-      const addNewCheckedDate = [
-        ...theCheckedDates,
-        currentDate,
-      ]
-      // новый массив с отмеченной датой (старый массив и новое значение взятое из онКлика
+      const newDatesList = isDateAlreadyChecked ?
+        removeDateFromList(theCheckedDates, currentDate) :
+        addItemToList(theCheckedDates, currentDate)
 
-      const removeCheckedDate = [
-        ...theCheckedDates.slice(0, theDateIndex),
-        ...theCheckedDates.slice(theDateIndex + 1),
-      ]
-      // удаляет чекнутую дату
+      let newCalendar = {
+        ...theCalendar,
+        checkedDates: newDatesList,
+      }
 
-      if (theDateIndex === -1) {
-        // чтобы отметить день, выделить черным
-        const newCalendar = {
-          ...theCalendar,
-          checkedDates: addNewCheckedDate
-        }
-        //   // это объект копирующий theCalendar с новым свойством theCheckedDates = addNewCheckedDate
+      const theCalendarIdx = calendars.indexOf(theCalendar)
 
-        const newCalendars = [
-          ...calendars.slice(0, theCalendarIdx),
-          newCalendar,
-          ...calendars.slice(theCalendarIdx + 1)
-        ]
-        // это объект со всеми старыми календарями и одним новым календарем newCalendar
-        return {
-          calendars: newCalendars,
-          // вернуть все календари с одним новым
-        }
-      } else {
-        const newCalendar = {
-          ...theCalendar,
-          checkedDates: removeCheckedDate
-        }
+      const newCalendars = replaceInArrayByIndex(calendars, newCalendar, theCalendarIdx)
 
-        const newCalendars = [
-          ...calendars.slice(0, theCalendarIdx),
-          newCalendar,
-          ...calendars.slice(theCalendarIdx + 1)
-        ]
+      saveItems(newCalendars)
 
-        return {
-          calendars: newCalendars,
-        }
+      return {
+        calendars: newCalendars,
       }
     })
   }
@@ -183,7 +171,7 @@ export default class App extends Component {
     }
 
     if (page === 'calendar') {
-      const theCalendar = calendars.find(cal => cal.id === selectedCalendarId)
+      const theCalendar = getCalendarFromCalendarsById(calendars, selectedCalendarId)
       element = <CalendarPage
         calendar={theCalendar}
         onArrowBackClick={this.goBackToMain}
