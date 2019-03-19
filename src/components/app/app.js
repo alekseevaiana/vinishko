@@ -116,10 +116,22 @@ export default class App extends Component {
     })
   }
 
+  deleteItem = (calendarId) => {
+    this.setState((state) => {
+      const {calendars} = state;
+      const newCalendars = calendars.filter((calendar) => calendar.id !== calendarId);
+      saveItems(newCalendars)
+        return {
+          calendars: newCalendars,
+          page: 'main',
+        }
+      },
+    )
+  }
+
 
   toggleDay = (currentDate, calendarId) => {
     this.setState((state) => {
-      // или const calendars = state.calendars
       const {calendars} = state
 
       const theCalendar = getCalendarFromCalendarsById(calendars, calendarId)
@@ -154,6 +166,7 @@ export default class App extends Component {
   render() {
     const {page, calendars, selectedCalendarId} = this.state
 
+
     let element
     if (page === 'main') {
       element = <CalendarsListPage
@@ -176,11 +189,12 @@ export default class App extends Component {
         calendar={theCalendar}
         onArrowBackClick={this.goBackToMain}
         toggleDay={this.toggleDay}
+        deleteItem={this.deleteItem}
       />
     }
 
     return (
-      <div>
+      <div className="container">
         {element}
       </div>
     )

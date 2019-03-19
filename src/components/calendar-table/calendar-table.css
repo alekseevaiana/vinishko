@@ -27,6 +27,12 @@
   font-size: 12px;
 }
 
+@media only screen and (min-width: 500px) {
+  .calendar-grid {
+    grid-auto-rows: calc(500px / 7);
+  }
+}
+
 .calendar-cell {
   border: 1px solid black;
   padding: 0;

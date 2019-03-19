@@ -11,3 +11,10 @@ body {
   text-transform: uppercase;
 
 }
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 2px 0 30px black, -2px 0 30px black;
+  height: 100vh;
+}

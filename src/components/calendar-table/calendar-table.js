@@ -28,7 +28,6 @@ export default class CalendarTable extends Component {
 
       let currentDate = `${year}-${month}-${day}`;
 
-      // let classNames = isChecked ? 'calendar-cell calendar-cell--checked' : 'calendar-cell'
       let classNames = isChecked ? 'calendar-cell calendar-cell--checked' : 'calendar-cell'
 
       if (isSameDay(date, today) && !isChecked) {
